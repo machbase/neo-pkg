@@ -1,0 +1,57 @@
+
+inject:
+  type: web
+
+distributable:
+  ## pre-built package download url
+  ## if you have a pre-built package, set the url
+  ## if you don't have a pre-built package, comment out the url
+  ## then the package will be built from source
+  ##
+  ## available variables
+  ## {{.tag}}     : tag name       (e.g. v1.2.3)
+  ## {{.version}} : version string (e.g. 1.2.3)
+  ## {{.os}}      : [linux, darwin, windows]
+  ## {{.arch}}    : [amd64, arm64]
+  url: https://github.com/machbase/neo-pkg-web-example/releases/download/{{ .tag }}/neo-pkg-web-example.zip
+
+  ## github organization/repository
+  ## currently only github is supported
+  github: machbase/neo-pkg-web-example
+
+  ## archive file depth
+  strip_components: 1
+
+description: |
+  This is a web example package for Machbase Neo.
+  Use this package as a template to create your own web application package.
+
+## If distributable.url is present, the following build section is ignored.
+##
+build:
+  script:
+    - npm install
+    - npm run build
+  env:
+    - NODE_ENV=production
+
+## If distributable.url is present, the following provides section is ignored.
+##
+provides:
+  - build/
+
+## If distributable.url is present, the following test section is ignored.
+##
+test:
+  script: |
+    echo "Testing web example package..."
+
+## Post install process
+install:
+  script: |
+    echo "Installing web example package..."
+
+## Pre uninstall process
+uninstall:
+  script: |
+    echo "Uninstalling web example package..."
