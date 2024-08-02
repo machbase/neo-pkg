@@ -45,10 +45,12 @@ func main() {
 			os.Exit(1)
 		}
 	}
-	if err := json.NewEncoder(writer).Encode(plans); err != nil {
+	sb := &strings.Builder{}
+	if err := json.NewEncoder(sb).Encode(plans); err != nil {
 		fmt.Println(err.Error())
 		os.Exit(1)
 	}
+	fmt.Fprintf(writer, "matrix=%s", sb.String())
 }
 
 type BuildPlan struct {
@@ -59,8 +61,8 @@ type BuildPlan struct {
 type BuildPlatform struct {
 	OS        []string `json:"os"`
 	Name      string   `json:"name"`
-	Container string   `json:"container"`
-	TinyName  string   `json:"tinyname"`
+	Container string   `json:"container,omitempty"`
+	TinyName  string   `json:"tinyname,omitempty"`
 }
 
 type PackageMeta struct {
