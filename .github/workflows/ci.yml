@@ -21,6 +21,9 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
+      - run: |
+          go mod download
+          go build -o neopkg .
       - uses: technote-space/get-diff-action@v6
         id: get-diff
         with:
@@ -36,7 +39,7 @@ jobs:
           else
             RESULT="zlib.net kernel.org/linux-headers"
           fi
-          go run . $RESULT
+          ./neopkg $RESULT
       - run: echo '${{ steps.process-diff.outputs.matrix }}' | jq
 
   build:
