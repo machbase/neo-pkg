@@ -59,6 +59,7 @@ jobs:
         with:
           go-version-file: 'go.mod'
       - run: |
+          apt-get update
           apt install -y ca-certificates
           go mod download
           go build -o neopkg .
