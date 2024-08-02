@@ -1,0 +1,50 @@
+name: ci
+run-name: "ci: ${{ github.event.pull_request.title }}"
+
+on:
+  pull_request:
+    paths:
+      - projects/**/*
+      - .github/workflows/ci.yml
+
+concurrency:
+  group: ci/${{ github.event.pull_request.head.ref }}
+  cancel-in-progress: true
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.process-diff.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: technote-space/get-diff-action@v6
+        id: get-diff
+        with:
+          PATTERNS: projects/**/package.yml
+      - name: ProcessDiff
+        id: process-diff
+        run: |
+          if [ -n "${{ steps.get-diff.outputs.diff }}" ]; then
+          for x in ${{ steps.get-diff.outputs.diff }}; do
+            y=$(echo $x | sed 's#projects/\(.*\)/[^/]*#\1#')
+            RESULT="$RESULT ${y//$'\n'/}"
+          done
+          else
+            RESULT="zlib.net kernel.org/linux-headers"
+          fi
+          ./.github/scripts/get-ci-matrix.ts $RESULT
+      - run: echo "${{ steps.process-diff.outputs.matrix }}" | jq
+
+  build:
+    needs: plan
+    strategy:
+      fail-fast: false
+      matrix: 
+        include: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    runs-on: ${{ matrix.platform.os }}
+    container: ${{ matrix.platform.container }}
+    name: ${{ matrix.pkg }} ${{ github.workspace }}
+    steps:
+        - uses: actions/checkout@v4
+  
