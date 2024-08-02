@@ -23,7 +23,7 @@ distributable:
   strip_components: 1
 
 description: |
-  This is a web example package for Machbase Neo.
+  This is a web example package for machbase-neo.
   Use this package as a template to create your own web application package.
 
 ## If distributable.url is present, the following build section is ignored.

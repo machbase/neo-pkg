@@ -18,6 +18,12 @@ jobs:
       matrix: ${{ steps.process-diff.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - run: |
+          go mod download
+          go build -o neopkg .
       - uses: technote-space/get-diff-action@v6
         id: get-diff
         with:
@@ -26,15 +32,17 @@ jobs:
         id: process-diff
         run: |
           if [ -n "${{ steps.get-diff.outputs.diff }}" ]; then
-          for x in ${{ steps.get-diff.outputs.diff }}; do
-            y=$(echo $x | sed 's#projects/\(.*\)/[^/]*#\1#')
-            RESULT="$RESULT ${y//$'\n'/}"
-          done
+            for x in ${{ steps.get-diff.outputs.diff }}; do
+              y=$(echo $x | sed 's#projects/\(.*\)/[^/]*#\1#')
+              RESULT="$RESULT ${y//$'\n'/}"
+            done
           else
             RESULT="zlib.net kernel.org/linux-headers"
           fi
-          ./.github/scripts/get-ci-matrix.ts $RESULT
-      - run: echo "${{ steps.process-diff.outputs.matrix }}" | jq
+
+          ./neopkg $RESULT
+          
+      - run: echo '${{ steps.process-diff.outputs.matrix }}' | jq
 
   build:
     needs: plan
