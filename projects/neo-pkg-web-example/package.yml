@@ -33,7 +33,7 @@ build:
     - npm install
     - npm run build
   env:
-    - NODE_ENV=production
+    - NODE_ENV=prd
 
 ## If distributable.url is present, the following provides section is ignored.
 ##
