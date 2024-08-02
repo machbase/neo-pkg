@@ -4,7 +4,7 @@ import { hooks, utils } from "pkgx"
 import { isString, isArray } from "is-what"
 
 const rvv: Record<string, any>[] = []
-// for (const arg of Deno.args) {
+ for (const arg of Deno.args) {
 //   const pkg = utils.pkg.parse(arg)
 //   const config = await get_config(pkg)
 //   const config = await get_config('linux/x86-64')
@@ -15,12 +15,12 @@ const rvv: Record<string, any>[] = []
 //     rv['pkg'] = arg
 //     rvv.push(rv)
 //   }
-// }
-
     const rv = {} as Record<string, any>
     rv['platform'] = get_matrix('linux/x86-64')
     rv['pkg'] = arg
     rvv.push(rv)
+}
+
 
 const ghout = Deno.env.get("GITHUB_OUTPUT")
 if (ghout) {
