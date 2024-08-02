@@ -1,5 +1,4 @@
 #!/usr/bin/env -S pkgx deno run -A
-
 import { hooks, utils } from "pkgx"
 import { isString, isArray } from "is-what"
 
