@@ -26,13 +26,13 @@ func main() {
 	for _, pkgName := range names {
 		meta, err := parsePackageMetaFile(filepath.Join("projects", pkgName, "package.yml"))
 		if err != nil {
-			fmt.Fprintln(writer, err.Error())
+			fmt.Println(err.Error())
 			os.Exit(1)
 		}
 		if meta.InjectRecipe.Type == "web" {
 			plan := &BuildPlan{
 				Platform: BuildPlatform{
-					OS:        map[string]string{"group": "linux-x86-64"},
+					OS:        []string{"ubuntu-latest"},
 					Name:      "linux+x86-64",
 					Container: "debian:buster-slim",
 					TinyName:  "*nix64",
@@ -41,12 +41,12 @@ func main() {
 			}
 			plans = append(plans, plan)
 		} else {
-			fmt.Fprintln(writer, "package does not support web injection")
+			fmt.Println("package does not support web injection")
 			os.Exit(1)
 		}
 	}
 	if err := json.NewEncoder(writer).Encode(plans); err != nil {
-		fmt.Fprintln(writer, err.Error())
+		fmt.Println(err.Error())
 		os.Exit(1)
 	}
 }
@@ -57,10 +57,10 @@ type BuildPlan struct {
 }
 
 type BuildPlatform struct {
-	OS        map[string]string `json:"os"`
-	Name      string            `json:"name"`
-	Container string            `json:"container"`
-	TinyName  string            `json:"tinyname"`
+	OS        []string `json:"os"`
+	Name      string   `json:"name"`
+	Container string   `json:"container"`
+	TinyName  string   `json:"tinyname"`
 }
 
 type PackageMeta struct {

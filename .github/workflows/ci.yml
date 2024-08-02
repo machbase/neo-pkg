@@ -39,7 +39,9 @@ jobs:
           else
             RESULT="zlib.net kernel.org/linux-headers"
           fi
+
           ./neopkg $RESULT
+          
       - run: echo '${{ steps.process-diff.outputs.matrix }}' | jq
 
   build:
