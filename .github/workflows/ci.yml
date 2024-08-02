@@ -17,7 +17,9 @@ jobs:
     outputs:
       matrix: ${{ steps.process-diff.outputs.matrix }}
     steps:
-      - uses: pkgxdev/setup@v2
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
       - uses: actions/checkout@v4
       - uses: technote-space/get-diff-action@v6
         id: get-diff
@@ -34,8 +36,8 @@ jobs:
           else
             RESULT="zlib.net kernel.org/linux-headers"
           fi
-          ./.github/scripts/get-ci-matrix.ts $RESULT
-      - run: echo "${{ steps.process-diff.outputs.matrix }}" | jq
+          go run . $RESULT
+      - run: echo '${{ steps.process-diff.outputs.matrix }}' | jq
 
   build:
     needs: plan
