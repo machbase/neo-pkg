@@ -40,7 +40,7 @@ jobs:
             RESULT="zlib.net kernel.org/linux-headers"
           fi
 
-          ./neopkg $RESULT
+          ./neopkg -plan $RESULT
           
       - run: echo '${{ steps.process-diff.outputs.matrix }}' | jq
 
@@ -54,5 +54,14 @@ jobs:
     container: ${{ matrix.platform.container }}
     name: ${{ matrix.pkg }} ${{ github.workspace }}
     steps:
-        - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - run: |
+          go mod download
+          go build -o neopkg .
+          ./neopkg -build ${{ matrix.pkg }}
+      
+
   

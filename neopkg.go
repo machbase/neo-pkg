@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io"
 	"os"
@@ -12,6 +13,19 @@ import (
 )
 
 func main() {
+	isPlan := flag.Bool("plan", false, "plan")
+	isBuild := flag.Bool("build", false, "build")
+	flag.Parse()
+
+	if *isPlan {
+		plan()
+	}
+	if *isBuild {
+		build()
+	}
+}
+
+func plan() {
 	var writer io.Writer
 	if ghOut := os.Getenv("GITHUB_OUTPUT"); ghOut != "" {
 		f, _ := os.OpenFile(ghOut, os.O_CREATE|os.O_WRONLY, 0644)
@@ -21,7 +35,8 @@ func main() {
 		writer = os.Stdout
 	}
 
-	names := strings.Fields(os.Args[1])
+	arg := flag.Arg(0)
+	names := strings.Fields(arg)
 	plans := []*BuildPlan{}
 	for _, pkgName := range names {
 		meta, err := parsePackageMetaFile(filepath.Join("projects", pkgName, "package.yml"))
@@ -113,4 +128,18 @@ func parsePackageMetaFile(path string) (*PackageMeta, error) {
 		return nil, err
 	}
 	return ret, nil
+}
+
+func build() {
+	pkgName := flag.Arg(0)
+	meta, err := parsePackageMetaFile(filepath.Join("projects", pkgName, "package.yml"))
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
+	if meta == nil {
+		fmt.Println("package meta is nil")
+		os.Exit(1)
+	}
+	fmt.Printf("-->%+v\n", meta)
 }
