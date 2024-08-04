@@ -8,7 +8,7 @@ distributable:
   ## if you don't have a pre-built package, comment out the url
   ## then the package will be built from source
   ##
-  ## available variables
+  ## available variables in the url
   ## {{.tag}}     : tag name       (e.g. v1.2.3)
   ## {{.version}} : version string (e.g. 1.2.3)
   ## {{.os}}      : [linux, darwin, windows]
@@ -16,7 +16,7 @@ distributable:
   url: https://github.com/machbase/neo-pkg-web-example/releases/download/{{ .tag }}/neo-pkg-web-example.zip
 
   ## github organization/repository
-  ## currently only github is supported
+  ## currently supports only github
   github: machbase/neo-pkg-web-example
 
   ## archive file depth
