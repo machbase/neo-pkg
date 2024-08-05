@@ -54,6 +54,7 @@ jobs:
     name: ${{ matrix.pkg }} ${{ matrix.platform.name }}
     env:
       PKGS_PATH: ${{ github.workspace }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
