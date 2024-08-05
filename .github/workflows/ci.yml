@@ -51,12 +51,15 @@ jobs:
         include: ${{ fromJSON(needs.plan.outputs.matrix) }}
     runs-on: ${{ matrix.platform.os }}
     container: ${{ matrix.platform.container }}
-    name: ${{ matrix.pkg }}-${{ matrix.name }}
+    name: ${{ matrix.pkg }}-${{ matrix.platform.name }}
     env:
       PKGS_PATH: ${{ github.workspace }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       - uses: actions/setup-go@v5
         with:
           go-version: '1.21'
