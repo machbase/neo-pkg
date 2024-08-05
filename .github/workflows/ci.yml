@@ -59,11 +59,18 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: '1.21'
-      - run: |
+      - name: prep-ubuntu
+        if: ${{ startsWith(matrix.platform.container, 'ubuntu')}}
+        run: |
           apt-get update
           apt-get install -y ca-certificates
-          go install github.com/machbase/neo-pkgdev@ec8ca08bf095ed4f43a44256990b4c90b33a13eb
           mkdir /tmp/pkgs
+      - name: prep-darwin
+        if: ${{ startsWith(matrix.platform.container, 'darwin')}}
+        run: |
+          mkdir /tmp/pkgs
+      - run: |
+          go install github.com/machbase/neo-pkgdev@ec8ca08bf095ed4f43a44256990b4c90b33a13eb
       - name: audit
         run: neo-pkgdev audit ${{ matrix.pkg }}
       - name: build
