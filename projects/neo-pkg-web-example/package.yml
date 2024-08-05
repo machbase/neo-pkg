@@ -13,7 +13,7 @@ distributable:
   ## {{.version}} : version string (e.g. 1.2.3)
   ## {{.os}}      : [linux, darwin, windows]
   ## {{.arch}}    : [amd64, arm64]
-  url: https://github.com/machbase/neo-pkg-web-example/releases/download/{{ .tag }}/neo-pkg-web-example.zip
+  #url: https://github.com/machbase/neo-pkg-web-example/releases/download/{{ .tag }}/neo-pkg-web-example.zip
 
   ## github organization/repository
   ## currently supports only github
@@ -25,6 +25,13 @@ distributable:
 description: |
   This is a web example package for machbase-neo.
   Use this package as a template to create your own web application package.
+
+platforms:
+  - linux/amd64
+  - linux/arm64
+  - darwin/amd64
+  - darwin/arm64
+  - windows/amd64
 
 ## If distributable.url is present, the following build section is ignored.
 ##
@@ -43,15 +50,15 @@ provides:
 ## If distributable.url is present, the following test section is ignored.
 ##
 test:
-  script: |
-    echo "Testing web example package..."
+  script:
+    - echo "Testing web example package..."
 
 ## Post install process
 install:
-  script: |
-    echo "Installing web example package..."
+  script:
+    - echo "Installing web example package..."
 
 ## Pre uninstall process
 uninstall:
-  script: |
-    echo "Uninstalling web example package..."
+  script:
+    - echo "Uninstalling web example package..."
