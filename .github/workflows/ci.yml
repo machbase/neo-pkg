@@ -60,7 +60,7 @@ jobs:
         with:
           go-version: '1.21'
       - run: |
-          apt-get install -y ca-certificates
+          sudo apt-get install -y ca-certificates
           go install github.com/machbase/neo-pkgdev@latest
           neo-pkgdev audit ${{ matrix.pkg }}
           neo-pkgdev build ${{ matrix.pkg }}
