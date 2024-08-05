@@ -20,10 +20,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version-file: 'go.mod'
+          go-version: '1.21'
       - run: |
-          go mod download
-          go build -o neopkg .
+          sudo apt-get update
+          sudo apt-get install -y ca-certificates
+      - run: go install github.com/machbase/neo-pkgdev@3eba73b1866ea518c705c98f769637be88946329
       - uses: technote-space/get-diff-action@v6
         id: get-diff
         with:
@@ -37,11 +38,9 @@ jobs:
               RESULT="$RESULT ${y//$'\n'/}"
             done
           else
-            RESULT="zlib.net kernel.org/linux-headers"
+            RESULT="neo-pkg-web-example"
           fi
-
-          ./neopkg -plan $RESULT
-          
+          neo-pkgdev plan $RESULT
       - run: echo '${{ steps.process-diff.outputs.matrix }}' | jq
 
   build:
@@ -53,17 +52,22 @@ jobs:
     runs-on: ${{ matrix.platform.os }}
     container: ${{ matrix.platform.container }}
     name: ${{ matrix.pkg }} ${{ github.workspace }}
+    env:
+      PKGS_PATH: ${{ github.workspace }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version-file: 'go.mod'
+          go-version: '1.21'
       - run: |
           apt-get update
-          apt install -y ca-certificates
-          go mod download
-          go build -o neopkg .
-          ./neopkg -build ${{ matrix.pkg }}
+          apt-get install -y ca-certificates
+          go install github.com/machbase/neo-pkgdev@3eba73b1866ea518c705c98f769637be88946329
+          mkdir /tmp/pkgs
+      - name: audit
+        run: neo-pkgdev audit ${{ matrix.pkg }}
+      - name: build
+        run: neo-pkgdev build ${{ matrix.pkg }}
       
 
   
