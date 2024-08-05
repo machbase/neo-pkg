@@ -24,7 +24,7 @@ jobs:
       - run: |
           sudo apt-get update
           sudo apt-get install -y ca-certificates
-      - run: go install github.com/machbase/neo-pkgdev@870f616cff6d56b6ea84c625896f63a460aa1bce
+      - run: go install github.com/machbase/neo-pkgdev@ec8ca08bf095ed4f43a44256990b4c90b33a13eb
       - uses: technote-space/get-diff-action@v6
         id: get-diff
         with:
@@ -51,7 +51,7 @@ jobs:
         include: ${{ fromJSON(needs.plan.outputs.matrix) }}
     runs-on: ${{ matrix.platform.os }}
     container: ${{ matrix.platform.container }}
-    name: ${{ matrix.pkg }} ${{ github.workspace }}
+    name: ${{ matrix.pkg }} ${{ matrix.name }}
     env:
       PKGS_PATH: ${{ github.workspace }}
     steps:
@@ -62,7 +62,7 @@ jobs:
       - run: |
           apt-get update
           apt-get install -y ca-certificates
-          go install github.com/machbase/neo-pkgdev@870f616cff6d56b6ea84c625896f63a460aa1bce
+          go install github.com/machbase/neo-pkgdev@ec8ca08bf095ed4f43a44256990b4c90b33a13eb
           mkdir /tmp/pkgs
       - name: audit
         run: neo-pkgdev audit ${{ matrix.pkg }}
