@@ -21,9 +21,8 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: '1.21'
-      - run: |
-          apt install -y ca-certificates
-          go install github.com/machbase/neo-pkgdev@latest
+      - run: apt install -y ca-certificates
+      - run: go install github.com/machbase/neo-pkgdev@latest
       - uses: technote-space/get-diff-action@v6
         id: get-diff
         with:
