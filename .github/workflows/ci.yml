@@ -51,9 +51,10 @@ jobs:
         include: ${{ fromJSON(needs.plan.outputs.matrix) }}
     runs-on: ${{ matrix.platform.os }}
     container: ${{ matrix.platform.container }}
-    name: ${{ matrix.pkg }} ${{ matrix.name }}
+    name: ${{ matrix.pkg }}-${{ matrix.name }}
     env:
       PKGS_PATH: ${{ github.workspace }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -63,7 +64,7 @@ jobs:
         if: ${{ startsWith(matrix.platform.container, 'ubuntu')}}
         run: |
           apt-get update
-          apt-get install -y ca-certificates
+          apt-get install -y ca-certificates wget
           mkdir /tmp/pkgs
       - name: prep-darwin
         if: ${{ startsWith(matrix.platform.container, 'darwin')}}
