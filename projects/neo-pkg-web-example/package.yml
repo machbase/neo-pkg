@@ -26,12 +26,14 @@ description: |
   This is a web example package for machbase-neo.
   Use this package as a template to create your own web application package.
 
+## If distributable.url is present, the following platforms section is ignored.
+## Leave empty if the artifacts are independent of the platform.
+## It supports only linux/amd64, darwin/amd64, darwin/arm64, windows/amd64 for now.
 platforms:
   - linux/amd64
   - darwin/amd64
   - darwin/arm64
   - windows/amd64
-#  - linux/arm64
 
 ## If distributable.url is present, the following build section is ignored.
 ##
