@@ -40,9 +40,7 @@ jobs:
           else
             RESULT="neo-pkg-web-example"
           fi
-
           neo-pkgdev plan $RESULT
-          
       - run: echo '${{ steps.process-diff.outputs.matrix }}' | jq
 
   build:
@@ -63,8 +61,13 @@ jobs:
           apt-get update
           apt-get install -y ca-certificates
           go install github.com/machbase/neo-pkgdev@latest
-          neo-pkgdev audit ${{ matrix.pkg }}
-          neo-pkgdev build ${{ matrix.pkg }}
+          mkdir /tmp/pkgs
+      - name: sync
+        run: neo-pkgdev sync --dir /tmp/pkgs
+      - name: audit
+        run: neo-pkgdev audit /tmp/pkgs/${{ matrix.pkg }}/package.yml
+      - name: build
+        run: neo-pkgdev build /tmp/pkgs/${{ matrix.pkg }}/package.yml
       
 
   
