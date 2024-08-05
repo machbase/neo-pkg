@@ -57,12 +57,13 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
       - uses: actions/setup-go@v5
         with:
           go-version: '1.21'
+      - uses: actions/setup-node@v4
+        if: ${{ startsWith(matrix.platform.container, 'ubuntu')}}
+        with:
+          node-version: '20'
       - name: prep-ubuntu
         if: ${{ startsWith(matrix.platform.container, 'ubuntu')}}
         run: |
