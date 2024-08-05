@@ -38,7 +38,7 @@ jobs:
               RESULT="$RESULT ${y//$'\n'/}"
             done
           else
-            RESULT="zlib.net kernel.org/linux-headers"
+            RESULT="neo-pkg-web-example"
           fi
 
           neo-pkgdev plan $RESULT
