@@ -28,10 +28,10 @@ description: |
 
 platforms:
   - linux/amd64
-  - linux/arm64
   - darwin/amd64
   - darwin/arm64
   - windows/amd64
+#  - linux/arm64
 
 ## If distributable.url is present, the following build section is ignored.
 ##
