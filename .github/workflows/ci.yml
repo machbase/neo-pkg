@@ -52,6 +52,8 @@ jobs:
     runs-on: ${{ matrix.platform.os }}
     container: ${{ matrix.platform.container }}
     name: ${{ matrix.pkg }} ${{ github.workspace }}
+    env:
+      PKGS_PATH: ${{ github.workspace }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -62,12 +64,10 @@ jobs:
           apt-get install -y ca-certificates
           go install github.com/machbase/neo-pkgdev@latest
           mkdir /tmp/pkgs
-      - name: sync
-        run: neo-pkgdev sync --dir /tmp/pkgs
       - name: audit
-        run: neo-pkgdev audit /tmp/pkgs/${{ matrix.pkg }}/package.yml
+        run: neo-pkgdev audit ${{ matrix.pkg }}
       - name: build
-        run: neo-pkgdev build /tmp/pkgs/${{ matrix.pkg }}/package.yml
+        run: neo-pkgdev build ${{ matrix.pkg }}
       
 
   
