@@ -1,3 +1,5 @@
+[![ci](https://github.com/machbase/neo-pkg/actions/workflows/ci.yml/badge.svg)](https://github.com/machbase/neo-pkg/actions/workflows/ci.yml)
+
 ## machbase-neo add-on packages roster
 
 > [!WARNING]  
