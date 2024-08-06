@@ -1,7 +1,4 @@
 
-inject:
-  type: web
-
 distributable:
   ## pre-built package download url
   ## if you have a pre-built package, set the url
@@ -27,13 +24,13 @@ description: |
   Use this package as a template to create your own web application package.
 
 ## If distributable.url is present, the following platforms section is ignored.
-## Leave empty if the artifacts are independent of the platform.
-## It supports only linux/amd64, darwin/amd64, darwin/arm64, windows/amd64 for now.
+## Leave this empty if the artifacts are independent of the platform.
+## It supports linux/amd64, darwin/amd64, darwin/arm64, windows/amd64
 platforms:
-  - linux/amd64
-  - darwin/amd64
-  - darwin/arm64
-  - windows/amd64
+  # - linux/amd64
+  # - darwin/amd64
+  # - darwin/arm64
+  # - windows/amd64
 
 ## If distributable.url is present, the following build section is ignored.
 ##
