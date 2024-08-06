@@ -19,12 +19,13 @@ platforms:
 ##
 build:
   script:
-    - wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
-    - sudo dpkg -i ${{ runner.temp }}/hugo.deb
+    - wget -O ${TMP}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
+    - sudo dpkg -i ${TMP}/hugo.deb
     - sudo snap install dart-sass
     - npm ci
     - hugo --gc --minify --baseURL "/"
   env:
+    - TMP=/tmp
     - HUGO_VERSION=0.120.4
     - HUGO_ENV=production
 
