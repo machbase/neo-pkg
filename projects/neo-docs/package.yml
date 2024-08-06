@@ -1,25 +1,16 @@
 
 distributable:
-  ## github organization/repository
-  ## currently supports only github
   github: machbase/machbase
-
-  ## archive file depth
   strip_components: 1
 
 description: |
   This is the documents for machbase-neo.
 
-## If distributable.url is present, the following platforms section is ignored.
-## Leave empty if the artifacts are independent of the platform.
-## It supports only linux/amd64, darwin/amd64, darwin/arm64, windows/amd64 for now.
 platforms:
 
-## If distributable.url is present, the following build section is ignored.
-##
 build:
   script:
-    - apt-get install golang-go
+    - apt-get install -y golang-go
     - wget -O ${TMP}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
     - dpkg -i ${TMP}/hugo.deb
     - npm install -g sass
@@ -30,23 +21,19 @@ build:
     - HUGO_VERSION=0.120.4
     - HUGO_ENV=production
 
-## If distributable.url is present, the following provides section is ignored.
-##
 provides:
   - public/
 
-## If distributable.url is present, the following test section is ignored.
-##
 test:
   script:
-    - echo "Testing web example package..."
+    - echo "Testing..."
 
 ## Post install process
 install:
   script:
-    - echo "Installing web example package..."
+    - echo "Installed..."
 
 ## Pre uninstall process
 uninstall:
   script:
-    - echo "Uninstalling web example package..."
+    - echo "Uninstalling..."
