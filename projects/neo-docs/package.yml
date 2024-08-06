@@ -1,50 +1,37 @@
 
 distributable:
-  ## pre-built package download url
-  ## if you have a pre-built package, set the url
-  ## if you don't have a pre-built package, comment out the url
-  ## then the package will be built from source
-  ##
-  ## available variables in the url
-  ## {{.tag}}     : tag name       (e.g. v1.2.3)
-  ## {{.version}} : version string (e.g. 1.2.3)
-  ## {{.os}}      : [linux, darwin, windows]
-  ## {{.arch}}    : [amd64, arm64]
-  #url: https://github.com/machbase/neo-pkg-web-example/releases/download/{{ .tag }}/neo-pkg-web-example.zip
-
   ## github organization/repository
   ## currently supports only github
-  github: machbase/neo-pkg-web-example
+  github: machbase/machbase
 
   ## archive file depth
   strip_components: 1
 
 description: |
-  This is a web example package for machbase-neo.
-  Use this package as a template to create your own web application package.
+  This is the documents for machbase-neo.
 
 ## If distributable.url is present, the following platforms section is ignored.
 ## Leave empty if the artifacts are independent of the platform.
 ## It supports only linux/amd64, darwin/amd64, darwin/arm64, windows/amd64 for now.
 platforms:
-  - linux/amd64
-  - darwin/amd64
-  - darwin/arm64
-  - windows/amd64
 
 ## If distributable.url is present, the following build section is ignored.
 ##
 build:
   script:
-    - npm install
-    - npm run build
+    - wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
+    - sudo dpkg -i ${{ runner.temp }}/hugo.deb
+    - sudo snap install dart-sass
+    - npm ci
+    - hugo --gc --minify --baseURL "/"
   env:
-    - NODE_ENV=prd
+    - HUGO_VERSION=0.120.4
+    - HUGO_ENV=production
 
 ## If distributable.url is present, the following provides section is ignored.
 ##
 provides:
-  - build/
+  - public/
 
 ## If distributable.url is present, the following test section is ignored.
 ##
