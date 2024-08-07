@@ -10,6 +10,7 @@ distributable:
   ## {{.version}} : version string (e.g. 1.2.3)
   ## {{.os}}      : [linux, darwin, windows]
   ## {{.arch}}    : [amd64, arm64]
+  ##
   #url: https://github.com/machbase/neo-pkg-web-example/releases/download/{{ .tag }}/neo-pkg-web-example.zip
 
   ## github organization/repository
