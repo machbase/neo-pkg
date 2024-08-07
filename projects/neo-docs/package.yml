@@ -17,7 +17,7 @@ build:
     - hugo --enableGitInfo=false --gc --minify --baseURL "/"
   env:
     - TMP=/tmp
-    - HUGO_VERSION=0.120.4
+    - HUGO_VERSION=0.121.2
     - HUGO_ENV=production
 
 provides:
@@ -26,6 +26,8 @@ provides:
 test:
   script:
     - echo "Testing..."
+    - ls -l public/
+    - echo "Test done."
 
 ## Post install process
 install:
