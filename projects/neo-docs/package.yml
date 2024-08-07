@@ -26,7 +26,7 @@ provides:
 test:
   script:
     - echo "Testing..."
-    - ls -l
+    - ls -l public/
     - echo "Test done."
 
 ## Post install process
