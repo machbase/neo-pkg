@@ -6,6 +6,8 @@ on:
     paths:
       - projects/**/*
       - .github/workflows/ci.yml
+  schedule:
+    - cron: '15 * * * *'
 
 concurrency:
   group: ci/${{ github.event.pull_request.head.ref }}
@@ -24,12 +26,14 @@ jobs:
       - run: |
           sudo apt-get update
           sudo apt-get install -y ca-certificates
-      - run: go install github.com/machbase/neo-pkgdev@e9705703a7aefb503708b20170220c4541549d5f
+      - run: go install github.com/machbase/neo-pkgdev@f4e6e11684c1d0f22efc8c270f0581a7346ee384
       - uses: technote-space/get-diff-action@v6
+        if: github.event_name == 'pull_request'
         id: get-diff
         with:
           PATTERNS: projects/**/package.yml
       - name: ProcessDiff
+        if: github.event_name == 'pull_request'
         id: process-diff
         run: |
           if [ -n "${{ steps.get-diff.outputs.diff }}" ]; then
@@ -42,6 +46,13 @@ jobs:
           fi
           neo-pkgdev plan $RESULT
       - run: echo '${{ steps.process-diff.outputs.matrix }}' | jq
+        if: github.event_name == 'pull_request'
+      - name: ProcessDiff
+        if: github.event_name == 'schedule'
+        id: process-rebuild
+        run: mkdir ./tmp && neo-pkgdev rebuild --dir ./tmp
+      - run: echo '${{ steps.process-rebuild.outputs.matrix }}' | jq
+        if: github.event_name == 'schedule'
 
   build:
     needs: plan
@@ -75,7 +86,7 @@ jobs:
         run: |
           mkdir /tmp/pkgs
       - run: |
-          go install github.com/machbase/neo-pkgdev@e9705703a7aefb503708b20170220c4541549d5f
+          go install github.com/machbase/neo-pkgdev@f4e6e11684c1d0f22efc8c270f0581a7346ee384
       - name: audit
         run: neo-pkgdev audit ${{ matrix.pkg }}
       - name: build
