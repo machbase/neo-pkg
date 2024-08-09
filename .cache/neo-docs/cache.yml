@@ -1,0 +1,17 @@
+name: neo-docs
+github:
+    organization: machbase
+    repo: machbase
+    name: machbase
+    full_name: machbase/machbase
+    description: ""
+    homepage: https://machbase.com/
+    language: C
+    license: null
+    default_branch: main
+latest_version: 24.08.08-1
+latest_release: 24.08.08-1
+latest_release_tag: 24.08.08-1
+latest_release_size: 0
+published_at: 2024-08-08T02:44:38Z
+strip_components: 1

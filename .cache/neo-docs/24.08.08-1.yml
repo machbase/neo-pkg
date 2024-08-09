@@ -1,0 +1,6 @@
+name: neo-docs
+version: 24.08.08-1
+dist_url: https://p-edge-packages.s3.ap-northeast-2.amazonaws.com/neo-pkg/machbase/machbase/machbase-24.08.08-1.tar.gz
+status_code: 200
+available: true
+content_length: 285356946
