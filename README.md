@@ -9,4 +9,4 @@ Please refer to the examples to add your project.
 
 For pure web application.
 
-- projects/neo-pkg-web-example
+- [projects/neo-pkg-web-example](./projects/neo-pkg-web-example)
