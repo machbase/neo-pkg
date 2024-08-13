@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: '1.21'
-      - run: go install github.com/machbase/neo-pkgdev@1f2006852c01891c4dac6b439e8ac8d7eeb2e61f
+      - run: go install github.com/machbase/neo-pkgdev@9432bb4991394a59d40919695cab1d04db957191
       - name: ProcessDiff
         run: |
           neo-pkgdev rebuild-cache --dir .
