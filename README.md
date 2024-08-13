@@ -4,13 +4,14 @@
 # machbase-neo add-on packages roster
 
 > [!WARNING]  
-> This work is currently under development and any pull requests will be ignored.
+> This work is currently under development and the pull requests might be rejected.
 
-Please refer to the examples to add your project.
+## How to register your web application
 
-For pure web application.
-
-- [projects/neo-pkg-web-example](./projects/neo-pkg-web-example)
+1. Ensure your package is available (see the section below)
+2. Check out this repo.
+3. Add your project meta information to `projects/{pkg-name}/package.yml` by referring to [projects/neo-pkg-web-example](./projects/neo-pkg-web-example) as a template.
+4. Pull Request your changes.
 
 ## neo pkg web application
 
