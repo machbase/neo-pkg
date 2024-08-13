@@ -4,8 +4,23 @@ github:
     repo: neo-pkg-web-example
     name: neo-pkg-web-example
     full_name: machbase/neo-pkg-web-example
+    owner:
+        login: machbase
+        id: 30223383
+        nodeid: MDEyOk9yZ2FuaXphdGlvbjMwMjIzMzgz
+        avatarurl: https://avatars.githubusercontent.com/u/30223383?v=4
+        gravatarid: ""
+        url: https://api.github.com/users/machbase
+        htmlurl: https://github.com/machbase
+        subscriptionsurl: https://api.github.com/users/machbase/subscriptions
+        organizationsurl: https://api.github.com/users/machbase/orgs
+        type: Organization
+        siteadmin: false
+    private: false
     description: neo package web application example
     homepage: ""
+    forks_count: 0
+    forks: 0
     language: TypeScript
     license:
         key: apache-2.0
@@ -14,9 +29,9 @@ github:
         url: https://api.github.com/licenses/apache-2.0
         nodeid: MDc6TGljZW5zZTI=
     default_branch: main
-latest_version: 0.1.0
-latest_release: v0.1.0
-latest_release_tag: v0.1.0
+latest_version: 0.1.1
+latest_release: v0.1.1
+latest_release_tag: v0.1.1
 latest_release_size: 0
-published_at: 2024-08-08T09:12:08Z
+published_at: 2024-08-13T03:02:24Z
 strip_components: 1

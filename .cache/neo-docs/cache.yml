@@ -4,8 +4,23 @@ github:
     repo: machbase
     name: machbase
     full_name: machbase/machbase
+    owner:
+        login: machbase
+        id: 30223383
+        nodeid: MDEyOk9yZ2FuaXphdGlvbjMwMjIzMzgz
+        avatarurl: https://avatars.githubusercontent.com/u/30223383?v=4
+        gravatarid: ""
+        url: https://api.github.com/users/machbase
+        htmlurl: https://github.com/machbase
+        subscriptionsurl: https://api.github.com/users/machbase/subscriptions
+        organizationsurl: https://api.github.com/users/machbase/orgs
+        type: Organization
+        siteadmin: false
+    private: false
     description: ""
     homepage: https://machbase.com/
+    forks_count: 0
+    forks: 0
     language: C
     license: null
     default_branch: main
