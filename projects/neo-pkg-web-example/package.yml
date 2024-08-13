@@ -57,8 +57,16 @@ test:
 install:
   script:
     - echo "Installing web example package..."
+    - $MACHBASE_NEO version
+install_windows:
+  script:
+    - echo "Installing web example package for Windows..."
+    - '%MACHBASE_NEO% version'
 
 ## Pre uninstall process
 uninstall:
   script:
     - echo "Uninstalling web example package..."
+uninstall_windows:
+  script:
+    - echo "Uninstalling web example package for Windows..."
