@@ -1,5 +1,8 @@
 name: rebuild-cache
 on:
+  push:
+    paths:
+      - .github/workflows/rebuild-cache.yml
   schedule:
     - cron: '15 1 * * *'
 
