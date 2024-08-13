@@ -11,7 +11,8 @@
 1. Ensure your package is available (see the section below)
 2. Check out this repo.
 3. Add your project meta information to `projects/{pkg-name}/package.yml` by referring to [projects/neo-pkg-web-example](./projects/neo-pkg-web-example) as a template.
-4. Pull Request your changes.
+The package names starting with `machbase` and `neo` are reserved and will be rejected or changed to other random names. Please ensure that you do not use these names for your packages. 
+4. Submit a Pull Request with your changes.
 
 ## neo pkg web application
 
