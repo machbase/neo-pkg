@@ -22,3 +22,10 @@ The neo pkg web application should be:
 2. Released and marked "latest" with semantic versioning (e.g. 1.2.3 or v1.2.3)
 3. It should have `LICENSE` file which is recognizable by https://spdx.org/licenses/
 4. The web doc base should be `/web/apps/{pkg-name}/`
+
+## Environment variables
+
+The available environment variables in `install` and `uninstall` script.
+
+- `MACHBASE_NEO` the path to the machbase-neo executable.
+- `MACHBASE_NEO_FILE` the path to the directory where machbase-neo gets *files* which are `*.sql`, `*.wrk`, and `*.tql`.
