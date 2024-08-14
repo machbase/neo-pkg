@@ -17,4 +17,6 @@ jobs:
       - run: go install github.com/machbase/neo-pkgdev@87d666a8b991a5cb78b8f47e58196a38aa3c3d10
       - name: ProcessDiff
         run: |
-          neo-pkgdev rebuild-cache --dir .
+          mkdir -p ./tmp && \
+          neo-pkgdev update --dir ./tmp && \
+          neo-pkgdev rebuild-cache --dir ./tmp
