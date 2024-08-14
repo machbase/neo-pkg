@@ -16,6 +16,8 @@ jobs:
           go-version: '1.21'
       - run: go install github.com/machbase/neo-pkgdev@87d666a8b991a5cb78b8f47e58196a38aa3c3d10
       - name: ProcessDiff
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p ./tmp && \
           neo-pkgdev update --dir ./tmp && \
