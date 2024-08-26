@@ -32,7 +32,7 @@ provides:
 
 test:
   script:
-    - ./.backend/neo-cat --help
+    - ./frontend/.backend/neo-cat --help
 
 install:
   script:
