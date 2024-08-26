@@ -17,6 +17,7 @@ platforms:
 build:
   script:
     - cd frontend
+    - npm install
     - npm run build
     - cd ..
     - go build -o ./frontend/build/.backend/neo-cat .
