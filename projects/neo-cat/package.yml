@@ -20,6 +20,7 @@ build:
     - npm install
     - npm run build
     - cd ..
+    - go mod download
     - go build -o ./frontend/build/.backend/neo-cat .
     - cp .backend.yml ./frontend/build
     - cp start.sh stop.sh ./frontend/build/.backend
