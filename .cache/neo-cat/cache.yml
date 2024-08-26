@@ -1,9 +1,9 @@
-name: neo-pkg-web-example
+name: neo-cat
 github:
     organization: machbase
-    repo: neo-pkg-web-example
-    name: neo-pkg-web-example
-    full_name: machbase/neo-pkg-web-example
+    repo: neo-cat
+    name: neo-cat
+    full_name: machbase/neo-cat
     owner:
         login: machbase
         id: 30223383
@@ -17,12 +17,12 @@ github:
         type: Organization
         siteadmin: false
     private: false
-    description: neo package web application example
-    homepage: https://www.machbase.com
-    forks_count: 1
-    forks: 1
-    stargazers_count: 1
-    language: TypeScript
+    description: "machbase neo's watchcat \U0001F408 instead of \U0001F415"
+    homepage: ""
+    forks_count: 0
+    forks: 0
+    stargazers_count: 0
+    language: Go
     license:
         key: apache-2.0
         name: Apache License 2.0
@@ -30,11 +30,12 @@ github:
         url: https://api.github.com/licenses/apache-2.0
         nodeid: MDc6TGljZW5zZTI=
     default_branch: main
-latest_version: 0.1.1
-latest_release: v0.1.1
-latest_release_tag: v0.1.1
-latest_release_size: 146384
-published_at: 2024-08-13T03:02:24Z
-strip_components: 1
+latest_version: 0.0.1-alpha
+latest_release: 0.0.1-alpha
+latest_release_tag: 0.0.1-alpha
+latest_release_size: 5257564
+published_at: 2024-08-26T03:26:33Z
+strip_components: 2
 platforms:
-    - /
+    - linux/amd64
+    - darwin/arm64

@@ -1,6 +1,8 @@
-name: neo-pkg-web-example
-version: 0.1.1
-dist_url: https://p-edge-packages.s3.ap-northeast-2.amazonaws.com/neo-pkg/machbase/neo-pkg-web-example/neo-pkg-web-example-0.1.1.tar.gz
-status_code: 200
-available: true
-content_length: 146384
+- name: neo-pkg-web-example
+  version: 0.1.1
+  platform_os: ""
+  platform_arch: ""
+  dist_url: https://p-edge-packages.s3.ap-northeast-2.amazonaws.com/neo-pkg/machbase/neo-pkg-web-example/neo-pkg-web-example-0.1.1.tar.gz
+  status_code: 200
+  available: true
+  content_length: 146384
