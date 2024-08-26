@@ -1,0 +1,47 @@
+
+distributable:
+  github: machbase/neo-cat
+  strip_components: 2
+
+description: |
+  This is a neo add-on package for monitoring,
+  It contains web frontend and backend process.
+  Use this package as a template to create your own frontend + backend application package.
+
+platforms:
+  - linux/amd64
+  - darwin/arm64
+  # - darwin/amd64
+  # - windows/amd64
+
+build:
+  script:
+    - cd frontend
+    - npm run build
+    - cd ..
+    - go build -o ./frontend/build/.backend/neo-cat .
+    - cp .backend.yml ./frontend/build
+    - cp start.sh stop.sh ./frontend/build/.backend
+  env:
+    - NODE_ENV=prd
+
+provides:
+  - frontend/build/
+
+test:
+  script:
+    - ./.backend/neo-cat --help
+
+install:
+  script:
+    - echo "Installing neo-cat package..."
+install_windows:
+  script:
+    - echo "Installing neo-cat package for Windows..."
+
+uninstall:
+  script:
+    - echo "Uninstalling neo-cat package..."
+uninstall_windows:
+  script:
+    - echo "Uninstalling neo-cat package for Windows..."
