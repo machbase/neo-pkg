@@ -36,9 +36,10 @@ platforms:
 ## If distributable.url is present, the following build section is ignored.
 ##
 build:
-  - run: |
-    npm install
-    npm run build
+  scripts:
+    - run: |
+      npm install
+      npm run build
   env:
     - NODE_ENV=prd
 

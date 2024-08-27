@@ -16,25 +16,26 @@ platforms:
   # - darwin/amd64
 
 build:
-  - run: |
-    cd frontend
-    npm install
-    npm run build
-    cd ..
-    go mod download
-    go build -o ./frontend/build/.backend/neo-cat .
-    cp scripts/* ./frontend/build/.backend
-    cp .backend.yml ./frontend/build
-  - on: windows
-    run: |
-      cd frontend
-      npm install
-      npm run build
-      cd ..
-      go mod download
-      go build -o .\frontend\build\.backend\neo-cat .
-      cp scripts\*.* .\frontend\build\.backend
-      cp .backend.yml .\frontend\build
+  scripts:
+    - run: |
+        cd frontend
+        npm install
+        npm run build
+        cd ..
+        go mod download
+        go build -o ./frontend/build/.backend/neo-cat .
+        cp scripts/* ./frontend/build/.backend
+        cp .backend.yml ./frontend/build
+    - on: windows
+      run: |
+        cd frontend
+        npm install
+        npm run build
+        cd ..
+        go mod download
+        go build -o .\frontend\build\.backend\neo-cat .
+        cp scripts\*.* .\frontend\build\.backend
+        cp .backend.yml .\frontend\build
   env:
     - NODE_ENV=prd
 
