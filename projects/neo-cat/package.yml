@@ -4,8 +4,8 @@ distributable:
   strip_components: 2
 
 description: |
-  This is a neo add-on package for monitoring,
-  It contains web frontend and backend process.
+  This is a neo add-on package for monitoring.
+  It includes a web frontend and backend process.
   Use this package as a template to create your own frontend + backend application package.
 
 platforms:
