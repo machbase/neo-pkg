@@ -36,9 +36,10 @@ platforms:
 ## If distributable.url is present, the following build section is ignored.
 ##
 build:
-  script:
-    - npm install
-    - npm run build
+  scripts:
+    - run: |
+        npm install
+        npm run build
   env:
     - NODE_ENV=prd
 
@@ -50,23 +51,26 @@ provides:
 ## If distributable.url is present, the following test section is ignored.
 ##
 test:
-  script:
-    - echo "Testing web example package..."
+  scripts:
+    - run: |
+        echo "Testing web example package..."
 
 ## Post install process
 install:
-  script:
-    - echo "Installing web example package..."
-    - $MACHBASE_NEO version
-install_windows:
-  script:
-    - echo "Installing web example package for Windows..."
-    - '%MACHBASE_NEO% version'
+  scripts:
+    - run: |
+        echo "Installing web example package..."
+        $MACHBASE_NEO version
+    - on: windows |
+      run: |
+        echo "Installing web example package for Windows..."
+        %MACHBASE_NEO% version
 
 ## Pre uninstall process
 uninstall:
-  script:
-    - echo "Uninstalling web example package..."
-uninstall_windows:
-  script:
-    - echo "Uninstalling web example package for Windows..."
+  scripts:
+    - run: |
+        echo "Uninstalling web example package..."
+    - on: windows
+      run: |
+        echo "Uninstalling web example package for Windows..."
