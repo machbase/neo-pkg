@@ -23,9 +23,15 @@ The neo pkg web application should be:
 3. It should have `LICENSE` file which is recognizable by https://spdx.org/licenses/
 4. The web doc base should be `/web/apps/{pkg-name}/`
 
+### pkg examples
+
+Use these examples as a template for your own pkg develeopment.
+
+- [neo-pkg-web-example](https://github.com/machbase/neo-pkg-web-example) web-frontend-only pkg example
+- [neo-cat](https://github.com/machbase/neo-cat) web-frontend + backend(golang) example
+
 ## Environment variables
 
 The available environment variables in `install` and `uninstall` script.
 
 - `MACHBASE_NEO` the path to the machbase-neo executable.
-- `MACHBASE_NEO_FILE` the path to the directory where machbase-neo gets *files* which are `*.sql`, `*.wrk`, and `*.tql`.
