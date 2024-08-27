@@ -12,19 +12,30 @@ platforms:
   - linux/amd64
   - linux/arm64
   - darwin/arm64
-  # - darwin/amd64
-  # - windows/amd64
+  - darwin/amd64
+  - windows/amd64
 
 build:
-  script:
-    - cd frontend
-    - npm install
-    - npm run build
-    - cd ..
-    - go mod download
-    - go build -o ./frontend/build/.backend/neo-cat .
-    - cp .backend.yml ./frontend/build
-    - cp start.sh stop.sh ./frontend/build/.backend
+  scripts:
+    - run: |
+        cd frontend
+        npm install
+        npm run build
+        cd ..
+        go mod download
+        go build -o ./frontend/build/.backend/neo-cat .
+        cp scripts/*.sh ./frontend/build/.backend
+        cp .backend.yml ./frontend/build
+    - on: windows
+      run: |
+        cd frontend
+        call npm install
+        call npm run build
+        cd ..
+        go mod download
+        go build -o ./frontend/build/.backend/neo-cat.exe .
+        copy .\scripts\*.cmd .\frontend\build\.backend
+        copy .backend.yml .\frontend\build
   env:
     - NODE_ENV=prd
 
@@ -32,19 +43,26 @@ provides:
   - frontend/build/
 
 test:
-  script:
-    - ./frontend/build/.backend/neo-cat --help
+  scripts:
+    - run: |
+        ./frontend/build/.backend/neo-cat --help
+    - on: windows
+      run: |
+        dir .\frontend\build\.backend
+        .\frontend\build\.backend\neo-cat.exe --help
 
 install:
-  script:
-    - echo "Installing neo-cat package..."
-install_windows:
-  script:
-    - echo "Installing neo-cat package for Windows..."
+  scripts:
+    - run: |
+        echo "Installing neo-cat package..."
+    - on: windows
+      run: |
+        echo "Installing neo-cat package for Windows..."
 
 uninstall:
-  script:
-    - echo "Uninstalling neo-cat package..."
-uninstall_windows:
-  script:
-    - echo "Uninstalling neo-cat package for Windows..."
+  scripts:
+    - run: |
+        echo "Uninstalling neo-cat package..."
+    - on: windows
+      run: |
+        echo "Uninstalling neo-cat package for Windows..."
