@@ -26,7 +26,7 @@ jobs:
       - run: |
           sudo apt-get update
           sudo apt-get install -y ca-certificates
-      - run: go install github.com/machbase/neo-pkgdev@901b455250964a5d1174e3b44d404fa2fd82984c
+      - run: go install github.com/machbase/neo-pkgdev@89763e22beaba9623e48894039a47bc932192804
       - uses: technote-space/get-diff-action@v6
         if: github.event_name == 'pull_request'
         id: get-diff
@@ -72,21 +72,21 @@ jobs:
         with:
           go-version: '1.21'
       - uses: actions/setup-node@v4
-        if: ${{ startsWith(matrix.platform.container, 'ubuntu')}}
+        if: ${{ contains(matrix.platform.container, 'ubuntu')}}
         with:
           node-version: '20'
       - name: prep-ubuntu
-        if: ${{ startsWith(matrix.platform.container, 'ubuntu')}}
+        if: ${{ contains(matrix.platform.container, 'ubuntu')}}
         run: |
           apt-get update
           apt-get install -y ca-certificates wget
           mkdir /tmp/pkgs
       - name: prep-darwin
-        if: ${{ startsWith(matrix.platform.container, 'darwin')}}
+        if: ${{ contains(matrix.platform.container, 'darwin')}}
         run: |
           mkdir /tmp/pkgs
       - run: |
-          go install github.com/machbase/neo-pkgdev@901b455250964a5d1174e3b44d404fa2fd82984c
+          go install github.com/machbase/neo-pkgdev@89763e22beaba9623e48894039a47bc932192804
       - name: audit
         run: neo-pkgdev audit ${{ matrix.pkg }}
       - name: build
