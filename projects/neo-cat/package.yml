@@ -29,11 +29,11 @@ build:
     - on: windows
       run: |
         cd frontend
-        npm install
-        npm run build
+        call npm install
+        call npm run build
         cd ..
         go mod download
-        go build -o .\frontend\build\.backend\neo-cat.exe .
+        go build -o ./frontend/build/.backend/neo-cat.exe .
         copy .\scripts\*.cmd .\frontend\build\.backend
         copy .backend.yml .\frontend\build
   env:
