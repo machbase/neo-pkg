@@ -46,6 +46,9 @@ test:
   scripts:
     - run: |
         ./frontend/build/.backend/neo-cat --help
+    - on: windows
+      run: |
+        .\frontend\build\.backend\neo-cat.exe --help
 
 install:
   scripts:
