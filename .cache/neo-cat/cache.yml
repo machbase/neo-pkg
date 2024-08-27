@@ -30,12 +30,12 @@ github:
         url: https://api.github.com/licenses/apache-2.0
         nodeid: MDc6TGljZW5zZTI=
     default_branch: main
-latest_version: 0.0.1-alpha
-latest_release: 0.0.1-alpha
-latest_release_tag: 0.0.1-alpha
-latest_release_size: 5257564
-published_at: 2024-08-26T03:26:33Z
+latest_version: 0.0.2-alpha
+latest_release: 0.0.2-alpha
+latest_release_tag: 0.0.2-alpha
+published_at: 2024-08-27T01:27:38Z
 strip_components: 2
 platforms:
     - linux/amd64
+    - linux/arm64
     - darwin/arm64
