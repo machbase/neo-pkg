@@ -72,17 +72,17 @@ jobs:
         with:
           go-version: '1.21'
       - uses: actions/setup-node@v4
-        if: ${{ startsWith(matrix.platform.container, 'ubuntu')}}
+        if: ${{ contains(matrix.platform.container, 'ubuntu')}}
         with:
           node-version: '20'
       - name: prep-ubuntu
-        if: ${{ startsWith(matrix.platform.container, 'ubuntu')}}
+        if: ${{ contains(matrix.platform.container, 'ubuntu')}}
         run: |
           apt-get update
           apt-get install -y ca-certificates wget
           mkdir /tmp/pkgs
       - name: prep-darwin
-        if: ${{ startsWith(matrix.platform.container, 'darwin')}}
+        if: ${{ contains(matrix.platform.container, 'darwin')}}
         run: |
           mkdir /tmp/pkgs
       - run: |
