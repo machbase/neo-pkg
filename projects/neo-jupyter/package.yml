@@ -19,7 +19,7 @@ build:
 provides:
   - ./.backend/
   - ./.backend.yml
-  - ./index.hml
+  - ./index.html
 
 install:
   scripts:
