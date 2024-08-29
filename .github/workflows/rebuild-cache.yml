@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: '1.21'
-      - run: go install github.com/machbase/neo-pkgdev@89763e22beaba9623e48894039a47bc932192804
+      - run: go install github.com/machbase/neo-pkgdev@58532a4524d44919dcbeaa4d3d029278c26dc5fb
       - name: ProcessDiff
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
