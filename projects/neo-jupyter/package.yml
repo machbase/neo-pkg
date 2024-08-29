@@ -1,0 +1,33 @@
+
+distributable:
+  github: machbase/neo-jupyter
+  strip_components: 0
+
+description: |
+  Jupyter Notebook Launcher
+
+platforms:
+  - linux/amd64
+  - darwin/arm64
+
+build:
+  scripts:
+    - run: |
+        go mod download
+        go build -o .backend/neo-jupyter .
+
+provides:
+  - ./.backend/
+  - ./.backend.yml
+  - ./index.html
+
+install:
+  scripts:
+    - run: |
+        echo "Installing neo-jupyter package..."
+        ls -l ./.backend
+
+uninstall:
+  scripts:
+    - run: |
+        echo "Uninstalling neo-jupyter package..."
