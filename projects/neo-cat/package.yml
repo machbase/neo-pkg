@@ -6,7 +6,7 @@ distributable:
 description: |
   This is a neo add-on package for monitoring.
   It includes a web frontend and backend process.
-  Use this package as a template to create your own frontend + backend application package.
+  Use this package as a template to create your own frontend + backend package.
 
 platforms:
   - linux/amd64
