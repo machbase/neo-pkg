@@ -4,7 +4,7 @@ distributable:
   strip_components: 0
 
 description: |
-  Jupyter Notebook Launcher
+  Jupyter Notebook Launcher, still in development phase.
 
 platforms:
   - linux/amd64
