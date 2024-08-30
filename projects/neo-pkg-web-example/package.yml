@@ -57,7 +57,7 @@ install:
     - run: |
         echo "Installing web example package..."
         $MACHBASE_NEO version
-    - on: windows |
+    - on: windows
       run: |
         echo "Installing web example package for Windows..."
         %MACHBASE_NEO% version
