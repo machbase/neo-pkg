@@ -37,6 +37,7 @@ build:
         copy .\scripts\*.cmd .\frontend\build\.backend
         copy .backend.yml .\frontend\build
   env:
+    - CI=false
     - NODE_ENV=prd
 
 provides:
