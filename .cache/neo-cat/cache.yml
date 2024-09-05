@@ -30,10 +30,10 @@ github:
         url: https://api.github.com/licenses/apache-2.0
         nodeid: MDc6TGljZW5zZTI=
     default_branch: main
-latest_version: 0.0.8
-latest_release: 0.0.8
-latest_release_tag: 0.0.8
-published_at: 2024-09-02T07:42:17Z
+latest_version: 0.0.11
+latest_release: 0.0.11
+latest_release_tag: 0.0.11
+published_at: 2024-09-05T01:28:12Z
 strip_components: 2
 platforms:
     - linux/amd64
