@@ -22,7 +22,7 @@ github:
     forks_count: 0
     forks: 0
     stargazers_count: 0
-    language: Go
+    language: TypeScript
     license:
         key: apache-2.0
         name: Apache License 2.0
@@ -30,10 +30,10 @@ github:
         url: https://api.github.com/licenses/apache-2.0
         nodeid: MDc6TGljZW5zZTI=
     default_branch: main
-latest_version: 0.0.11
-latest_release: 0.0.11
-latest_release_tag: 0.0.11
-published_at: 2024-09-05T01:28:12Z
+latest_version: 0.0.12
+latest_release: 0.0.12
+latest_release_tag: 0.0.12
+published_at: 2024-09-06T01:22:05Z
 strip_components: 2
 platforms:
     - linux/amd64
