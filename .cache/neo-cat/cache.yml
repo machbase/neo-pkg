@@ -24,16 +24,16 @@ github:
     stargazers_count: 0
     language: TypeScript
     license:
-        key: other
-        name: Other
-        spdxid: NOASSERTION
-        url: ""
-        nodeid: MDc6TGljZW5zZTA=
+        key: apache-2.0
+        name: Apache License 2.0
+        spdxid: Apache-2.0
+        url: https://api.github.com/licenses/apache-2.0
+        nodeid: MDc6TGljZW5zZTI=
     default_branch: main
-latest_version: 0.0.19
-latest_release: 0.0.19
-latest_release_tag: 0.0.19
-published_at: 2024-09-11T01:42:18Z
+latest_version: 0.0.20
+latest_release: 0.0.20
+latest_release_tag: 0.0.20
+published_at: 2024-09-12T00:41:37Z
 strip_components: 2
 platforms:
     - linux/amd64
