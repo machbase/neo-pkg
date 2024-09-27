@@ -25,10 +25,10 @@ github:
     language: C
     license: null
     default_branch: main
-latest_version: 24.08.13-1
-latest_release: 24.08.13-1
-latest_release_tag: 24.08.13-1
-published_at: 2024-08-13T09:16:04Z
+latest_version: 24.09.27
+latest_release: 24.09.27
+latest_release_tag: 24.09.27
+published_at: 2024-09-27T00:11:23Z
 strip_components: 1
 platforms:
     - /
