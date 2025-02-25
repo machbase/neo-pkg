@@ -5,6 +5,7 @@ on:
       - .github/workflows/rebuild-cache.yml
   schedule:
     - cron: '30 2 * * *'
+  workflow_dispatch:
 
 jobs:
   rebuild-cache:
