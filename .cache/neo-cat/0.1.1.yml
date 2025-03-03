@@ -5,7 +5,7 @@
   dist_url: https://p-edge-packages.s3.ap-northeast-2.amazonaws.com/neo-pkg/machbase/neo-cat/neo-cat-0.1.1-linux-amd64.tar.gz
   status_code: 200
   available: true
-  content_length: 13153186
+  content_length: 13153187
 - name: neo-cat
   version: 0.1.1
   platform_os: darwin
@@ -13,7 +13,7 @@
   dist_url: https://p-edge-packages.s3.ap-northeast-2.amazonaws.com/neo-pkg/machbase/neo-cat/neo-cat-0.1.1-darwin-arm64.tar.gz
   status_code: 200
   available: true
-  content_length: 12748422
+  content_length: 12748396
 - name: neo-cat
   version: 0.1.1
   platform_os: darwin
@@ -21,7 +21,7 @@
   dist_url: https://p-edge-packages.s3.ap-northeast-2.amazonaws.com/neo-pkg/machbase/neo-cat/neo-cat-0.1.1-darwin-amd64.tar.gz
   status_code: 200
   available: true
-  content_length: 13479501
+  content_length: 13479521
 - name: neo-cat
   version: 0.1.1
   platform_os: windows
@@ -29,4 +29,4 @@
   dist_url: https://p-edge-packages.s3.ap-northeast-2.amazonaws.com/neo-pkg/machbase/neo-cat/neo-cat-0.1.1-windows-amd64.tar.gz
   status_code: 200
   available: true
-  content_length: 13517068
+  content_length: 13517073
