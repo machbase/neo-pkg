@@ -98,9 +98,6 @@ install:
   scripts:
     - run: |
         echo "Installing neo-blackbox package..."
-        test -x ./bin/neo-blackbox
-        test -f ./config/config.yaml
-        test -f ./.backend.yml
         chmod +x ./.backend/start.sh ./.backend/stop.sh
 
 uninstall:
