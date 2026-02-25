@@ -1,7 +1,13 @@
 name: ci
-run-name: "ci: ${{ github.event.pull_request.title }}"
+run-name: "ci: ${{ github.event.pull_request.title || github.ref_name }}"
 
 on:
+  push:
+    branches:
+      - test-pkg
+    paths:
+      - projects/**/*
+      - .github/workflows/ci.yml
   pull_request:
     paths:
       - projects/**/*
@@ -11,14 +17,14 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: ci/${{ github.event.pull_request.head.ref }}
+  group: ci/${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
 jobs:
   plan:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.process-diff.outputs.matrix }} ${{ steps.process-rebuild.outputs.matrix }}
+      matrix: ${{ steps.process-diff.outputs.matrix }} ${{ steps.process-push.outputs.matrix }} ${{ steps.process-rebuild.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -45,9 +51,31 @@ jobs:
           else
             RESULT="neo-pkg-web-example"
           fi
+
           neo-pkgdev plan $RESULT
       - run: echo '${{ steps.process-diff.outputs.matrix }}' | jq
         if: github.event_name == 'pull_request'
+      - name: ProcessPushDiff
+        if: github.event_name == 'push'
+        id: process-push
+        run: |
+          DEFAULT_BRANCH="${{ github.event.repository.default_branch }}"
+          git fetch --no-tags --depth=1 origin "+refs/heads/${DEFAULT_BRANCH}:refs/remotes/origin/${DEFAULT_BRANCH}"
+          CHANGED_FILES=$(git diff --name-only "origin/${DEFAULT_BRANCH}" "${{ github.sha }}" -- 'projects/**/package.yml')
+
+          RESULT=$(echo "$CHANGED_FILES" | sed -n 's#projects/\(.*\)/package\.yml#\1#p' | sort -u | tr '\n' ' ' | xargs)
+
+          if [ -n "$RESULT" ]; then
+            neo-pkgdev plan $RESULT
+          else
+            {
+              echo 'matrix<<EOF'
+              echo '[]'
+              echo 'EOF'
+            } >> "$GITHUB_OUTPUT"
+          fi
+      - run: echo '${{ steps.process-push.outputs.matrix }}' | jq
+        if: github.event_name == 'push'
       - name: ProcessDiff
         if: github.event_name == 'schedule'
         id: process-rebuild
