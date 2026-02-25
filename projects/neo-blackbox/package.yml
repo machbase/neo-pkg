@@ -93,3 +93,20 @@ test:
         test -f dist/.backend.yml
         test -x dist/.backend/start.sh
         test -x dist/.backend/stop.sh
+
+install:
+  scripts:
+    - run: |
+        echo "Installing neo-blackbox package..."
+        test -x ./bin/neo-blackbox
+        test -f ./config/config.yaml
+        test -f ./.backend.yml
+        chmod +x ./.backend/start.sh ./.backend/stop.sh
+
+uninstall:
+  scripts:
+    - run: |
+        echo "Uninstalling neo-blackbox package..."
+        if [ -x ./.backend/stop.sh ]; then
+          ./.backend/stop.sh || true
+        fi
