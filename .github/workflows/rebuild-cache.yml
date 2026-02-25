@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: '1.21'
-      - run: go install github.com/machbase/neo-pkgdev@6b21450afd8d959e5dce5fbacb7dc187417d2517
+      - run: go install github.com/machbase/neo-pkgdev@17c3dcdbb07df5bbd5fe9f82b473a1c1063d940f
       - name: Rebuild Cache
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
