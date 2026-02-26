@@ -104,6 +104,3 @@ uninstall:
   scripts:
     - run: |
         echo "Uninstalling neo-blackbox package..."
-        if [ -x ./.backend/stop.sh ]; then
-          ./.backend/stop.sh || true
-        fi
