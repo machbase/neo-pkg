@@ -32,3 +32,4 @@ published_at: 2026-02-27T12:40:53Z
 strip_components: 1
 platforms:
     - linux/amd64
+    - darwin/arm64
