@@ -25,11 +25,10 @@ github:
     language: Go
     license: null
     default_branch: main
-latest_version: 0.1.5
-latest_release: v0.1.5
-latest_release_tag: 0.1.5
-published_at: 2026-02-28T07:50:49Z
+latest_version: 0.1.6
+latest_release: v0.1.6
+latest_release_tag: 0.1.6
+published_at: 2026-03-03T07:22:53Z
 strip_components: 1
 platforms:
     - linux/amd64
-    - darwin/arm64
