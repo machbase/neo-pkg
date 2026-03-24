@@ -1,0 +1,16 @@
+- name: neo-pkg-llm
+  version: 0.1.0
+  platform_os: linux
+  platform_arch: amd64
+  dist_url: https://p-edge-packages.s3.ap-northeast-2.amazonaws.com/neo-pkg/machbase/neo-pkg-llm/neo-pkg-llm-0.1.0-linux-amd64.tar.gz
+  status_code: 200
+  available: true
+  content_length: 5334714
+- name: neo-pkg-llm
+  version: 0.1.0
+  platform_os: darwin
+  platform_arch: arm64
+  dist_url: https://p-edge-packages.s3.ap-northeast-2.amazonaws.com/neo-pkg/machbase/neo-pkg-llm/neo-pkg-llm-0.1.0-darwin-arm64.tar.gz
+  status_code: 200
+  available: true
+  content_length: 5035592

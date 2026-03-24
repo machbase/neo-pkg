@@ -1,9 +1,9 @@
-name: neo-blackbox
+name: neo-pkg-llm
 github:
     organization: machbase
-    repo: neo-pkg-blackbox
-    name: neo-pkg-blackbox
-    full_name: machbase/neo-pkg-blackbox
+    repo: neo-pkg-llm
+    name: neo-pkg-llm
+    full_name: machbase/neo-pkg-llm
     owner:
         login: machbase
         id: 30223383
@@ -21,14 +21,15 @@ github:
     homepage: ""
     forks_count: 0
     forks: 0
-    stargazers_count: 0
+    stargazers_count: 1
     language: Go
     license: null
     default_branch: main
-latest_version: 0.1.6
-latest_release: v0.1.6
-latest_release_tag: 0.1.6
-published_at: 2026-03-03T07:22:53Z
+latest_version: 0.1.0
+latest_release: v0.1.0
+latest_release_tag: 0.1.0
+published_at: 2026-03-24T07:21:39Z
 strip_components: 1
 platforms:
     - linux/amd64
+    - darwin/arm64
