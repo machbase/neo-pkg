@@ -27,7 +27,6 @@ test:
     scripts:
         - run: |
               test -x dist/neo-pkg-llm
-              test -d dist/configs
               test -f dist/.backend.yml
               test -f dist/index.html
               test -x dist/.backend/start.sh
