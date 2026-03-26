@@ -25,6 +25,16 @@ build:
               cp .backend.yml dist/
               cp index.html dist/
               chmod +x dist/.backend/*.sh
+        - on: windows
+          run: |
+              go version
+              go mod tidy
+              if not exist dist mkdir dist
+              if not exist dist\.backend mkdir dist\.backend
+              go build -v -o dist\neo-pkg-llm.exe .
+              copy scripts\*.cmd dist\.backend\
+              copy .backend.yml dist\
+              copy index.html dist\
 provides:
     - dist/
 test:
@@ -35,12 +45,25 @@ test:
               test -f dist/index.html
               test -x dist/.backend/start.sh
               test -x dist/.backend/stop.sh
+        - on: windows
+          run: |
+              dir dist\neo-pkg-llm.exe
+              dir dist\.backend.yml
+              dir dist\index.html
+              dir dist\.backend\start.cmd
+              dir dist\.backend\stop.cmd
 install:
     scripts:
         - run: |
               echo "Installing neo-pkg-llm package..."
               chmod +x ./.backend/start.sh ./.backend/stop.sh
+        - on: windows
+          run: |
+              echo "Installing neo-pkg-llm package for Windows..."
 uninstall:
     scripts:
         - run: |
               echo "Uninstalling neo-pkg-llm package..."
+        - on: windows
+          run: |
+              echo "Uninstalling neo-pkg-llm package for Windows..."
