@@ -28,11 +28,12 @@ jobs:
                   sudo apt-get update
                   sudo apt-get install -y ca-certificates
             - run: go install github.com/machbase/neo-pkgdev@58532a4524d44919dcbeaa4d3d029278c26dc5fb
-            - uses: technote-space/get-diff-action@v6
-              if: github.event_name == 'pull_request' && github.event.pull_request.state == 'open'
+            - name: GetDiff
+              if: github.event_name == 'pull_request'
               id: get-diff
-              with:
-                  PATTERNS: projects/**/package.yml
+              run: |
+                  git fetch origin main
+                  echo "diff=$(git diff origin/main...HEAD --name-only -- 'projects/**/package.yml' | tr '\n' ' ')" >> $GITHUB_OUTPUT
             - name: ProcessDiff
               if: github.event_name == 'pull_request'
               id: process-diff
