@@ -1,32 +1,27 @@
 distributable:
   github: machbase/neo-pkg-llm
   strip_components: 1
-
 description: |
   neo-pkg-llm package for machbase-neo.
   LLM agent backend process.
-
 platforms:
   - linux/amd64
   - linux/arm64
   - darwin/arm64
   - darwin/amd64
-
 build:
   scripts:
     - run: |
         go mod tidy
-        mkdir -p dist
+        mkdir -p dist dist/.backend
         go build -o dist/neo-pkg-llm .
         cp -r configs dist/
-        cp -r scripts dist/
+        cp scripts/*.sh dist/.backend/
         cp .backend.yml dist/
         cp index.html dist/
-        chmod +x dist/scripts/*.sh
-
+        chmod +x dist/.backend/*.sh
 provides:
   - dist/
-
 test:
   scripts:
     - run: |
@@ -34,15 +29,13 @@ test:
         test -d dist/configs
         test -f dist/.backend.yml
         test -f dist/index.html
-        test -x dist/scripts/start.sh
-        test -x dist/scripts/stop.sh
-
+        test -x dist/.backend/start.sh
+        test -x dist/.backend/stop.sh
 install:
   scripts:
     - run: |
         echo "Installing neo-pkg-llm package..."
-        chmod +x ./scripts/start.sh ./scripts/stop.sh
-
+        chmod +x ./.backend/start.sh ./.backend/stop.sh
 uninstall:
   scripts:
     - run: |
