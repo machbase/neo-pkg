@@ -12,9 +12,11 @@ platforms:
 build:
     scripts:
         - run: |
+              set -ex
+              go version
               go mod tidy
               mkdir -p dist dist/.backend
-              go build -o dist/neo-pkg-llm .
+              go build -v -o dist/neo-pkg-llm .
               cp scripts/*.sh dist/.backend/
               cp .backend.yml dist/
               cp index.html dist/
