@@ -1,4 +1,4 @@
-name: "ci: ${{ github.event.pull_request.title }}"
+name: ci
 run-name: "ci: ${{ github.event.pull_request.title }}"
 
 on:
