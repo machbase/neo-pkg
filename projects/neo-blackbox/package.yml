@@ -1,11 +1,9 @@
 distributable:
   github: machbase/neo-pkg-blackbox
   strip_components: 1
-
 description: |
   neo-blackbox package for machbase-neo.
   Built from the repository latest release source per target platform.
-
 platforms:
   - linux/amd64
 
