@@ -1,4 +1,4 @@
-name: ci
+name: "ci: ${{ github.event.pull_request.title }}"
 run-name: "ci: ${{ github.event.pull_request.title }}"
 
 on:
@@ -9,16 +9,21 @@ on:
     schedule:
         - cron: "45 1 * * *"
     workflow_dispatch:
+        inputs:
+            package:
+                description: "Package to build (e.g. neo-pkg-llm). Leave empty for full rebuild."
+                required: false
+                default: ""
 
 concurrency:
-    group: ci/${{ github.event.pull_request.head.ref }}
+    group: ci/${{ github.event.pull_request.head.ref || github.ref }}
     cancel-in-progress: true
 
 jobs:
     plan:
         runs-on: ubuntu-latest
         outputs:
-            matrix: ${{ steps.process-diff.outputs.matrix }} ${{ steps.process-rebuild.outputs.matrix }}
+            matrix: ${{ steps.process-diff.outputs.matrix || steps.process-rebuild.outputs.matrix || steps.process-dispatch.outputs.matrix }}
         steps:
             - uses: actions/checkout@v4
             - uses: actions/setup-go@v5
@@ -28,19 +33,20 @@ jobs:
                   sudo apt-get update
                   sudo apt-get install -y ca-certificates
             - run: go install github.com/machbase/neo-pkgdev@58532a4524d44919dcbeaa4d3d029278c26dc5fb
-            - name: GetDiff
+
+            # --- pull_request ---
+            - uses: technote-space/get-diff-action@v6
               if: github.event_name == 'pull_request'
               id: get-diff
-              run: |
-                  git fetch origin main
-                  echo "diff=$(git diff origin/main...HEAD --name-only -- 'projects/**/package.yml' | tr '\n' ' ')" >> $GITHUB_OUTPUT
+              with:
+                  PATTERNS: projects/**/package.yml
             - name: ProcessDiff
               if: github.event_name == 'pull_request'
               id: process-diff
               run: |
                   if [ -n "${{ steps.get-diff.outputs.diff }}" ]; then
                     for x in ${{ steps.get-diff.outputs.diff }}; do
-                      y=$(echo $x | sed 's#projects/\(.*\)/[^/]*#\1#')
+                      y=$(echo $x | sed 's#projects/\(.\)/[^/]#\1#')
                       RESULT="$RESULT ${y//$'\n'/}"
                     done
                   else
@@ -49,12 +55,27 @@ jobs:
                   neo-pkgdev plan $RESULT
             - run: echo '${{ steps.process-diff.outputs.matrix }}' | jq
               if: github.event_name == 'pull_request'
-            - name: ProcessDiff
+
+            # --- schedule ---
+            - name: ProcessRebuild
               if: github.event_name == 'schedule'
               id: process-rebuild
               run: mkdir ./tmp && neo-pkgdev rebuild-plan --dir ./tmp
             - run: echo '${{ steps.process-rebuild.outputs.matrix }}' | jq
               if: github.event_name == 'schedule'
+
+            # --- workflow_dispatch ---
+            - name: ProcessDispatch
+              if: github.event_name == 'workflow_dispatch'
+              id: process-dispatch
+              run: |
+                  if [ -n "${{ github.event.inputs.package }}" ]; then
+                    neo-pkgdev plan ${{ github.event.inputs.package }}
+                  else
+                    mkdir ./tmp && neo-pkgdev rebuild-plan --dir ./tmp
+                  fi
+            - run: echo '${{ steps.process-dispatch.outputs.matrix }}' | jq
+              if: github.event_name == 'workflow_dispatch'
 
     build:
         needs: plan
@@ -84,9 +105,14 @@ jobs:
                   apt-get install -y ca-certificates wget
                   mkdir /tmp/pkgs
             - name: prep-darwin
-              if: ${{ contains(matrix.platform.container, 'darwin')}}
+              if: ${{ contains(matrix.platform.os, 'macos')}}
               run: |
                   mkdir /tmp/pkgs
+            - name: prep-windows
+              if: ${{ contains(matrix.platform.os, 'windows')}}
+              shell: bash
+              run: |
+                  mkdir -p /tmp/pkgs
             - run: |
                   go install github.com/machbase/neo-pkgdev@58532a4524d44919dcbeaa4d3d029278c26dc5fb
             - name: audit
