@@ -1,42 +1,42 @@
 distributable:
-  github: machbase/neo-pkg-llm
-  strip_components: 1
+    github: machbase/neo-pkg-llm
+    strip_components: 1
 description: |
-  neo-pkg-llm package for machbase-neo.
-  LLM agent backend process.
+    LLM agent backend process package for machbase-neo.
+    Provides LLM-based agent functionality with configurable backends.
 platforms:
-  - linux/amd64
-  - linux/arm64
-  - darwin/arm64
-  - darwin/amd64
+    - linux/amd64
+    - linux/arm64
+    - darwin/arm64
+    - darwin/amd64
 build:
-  scripts:
-    - run: |
-        go mod tidy
-        mkdir -p dist dist/.backend
-        go build -o dist/neo-pkg-llm .
-        cp -r configs dist/
-        cp scripts/*.sh dist/.backend/
-        cp .backend.yml dist/
-        cp index.html dist/
-        chmod +x dist/.backend/*.sh
+    scripts:
+        - run: |
+              set -ex
+              go version
+              go mod tidy
+              mkdir -p dist dist/.backend
+              go build -v -o dist/neo-pkg-llm .
+              cp scripts/*.sh dist/.backend/
+              cp .backend.yml dist/
+              cp index.html dist/
+              chmod +x dist/.backend/*.sh
 provides:
-  - dist/
+    - dist/
 test:
-  scripts:
-    - run: |
-        test -x dist/neo-pkg-llm
-        test -d dist/configs
-        test -f dist/.backend.yml
-        test -f dist/index.html
-        test -x dist/.backend/start.sh
-        test -x dist/.backend/stop.sh
+    scripts:
+        - run: |
+              test -x dist/neo-pkg-llm
+              test -f dist/.backend.yml
+              test -f dist/index.html
+              test -x dist/.backend/start.sh
+              test -x dist/.backend/stop.sh
 install:
-  scripts:
-    - run: |
-        echo "Installing neo-pkg-llm package..."
-        chmod +x ./.backend/start.sh ./.backend/stop.sh
+    scripts:
+        - run: |
+              echo "Installing neo-pkg-llm package..."
+              chmod +x ./.backend/start.sh ./.backend/stop.sh
 uninstall:
-  scripts:
-    - run: |
-        echo "Uninstalling neo-pkg-llm package..."
+    scripts:
+        - run: |
+              echo "Uninstalling neo-pkg-llm package..."

@@ -2,96 +2,96 @@ name: ci
 run-name: "ci: ${{ github.event.pull_request.title }}"
 
 on:
-  pull_request:
-    paths:
-      - projects/**/*
-      - .github/workflows/ci.yml
-  schedule:
-    - cron: '45 1 * * *'
-  workflow_dispatch:
+    pull_request:
+        paths:
+            - projects/**/*
+            - .github/workflows/ci.yml
+    schedule:
+        - cron: "45 1 * * *"
+    workflow_dispatch:
 
 concurrency:
-  group: ci/${{ github.event.pull_request.head.ref }}
-  cancel-in-progress: true
+    group: ci/${{ github.event.pull_request.head.ref }}
+    cancel-in-progress: true
 
 jobs:
-  plan:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.process-diff.outputs.matrix }} ${{ steps.process-rebuild.outputs.matrix }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
-        with:
-          go-version: '1.21'
-      - run: |
-          sudo apt-get update
-          sudo apt-get install -y ca-certificates
-      - run: go install github.com/machbase/neo-pkgdev@58532a4524d44919dcbeaa4d3d029278c26dc5fb
-      - uses: technote-space/get-diff-action@v6
-        if: github.event_name == 'pull_request'
-        id: get-diff
-        with:
-          PATTERNS: projects/**/package.yml
-      - name: ProcessDiff
-        if: github.event_name == 'pull_request'
-        id: process-diff
-        run: |
-          if [ -n "${{ steps.get-diff.outputs.diff }}" ]; then
-            for x in ${{ steps.get-diff.outputs.diff }}; do
-              y=$(echo $x | sed 's#projects/\(.*\)/[^/]*#\1#')
-              RESULT="$RESULT ${y//$'\n'/}"
-            done
-          else
-            RESULT="neo-pkg-web-example"
-          fi
-          neo-pkgdev plan $RESULT
-      - run: echo '${{ steps.process-diff.outputs.matrix }}' | jq
-        if: github.event_name == 'pull_request'
-      - name: ProcessDiff
-        if: github.event_name == 'schedule'
-        id: process-rebuild
-        run: mkdir ./tmp && neo-pkgdev rebuild-plan --dir ./tmp
-      - run: echo '${{ steps.process-rebuild.outputs.matrix }}' | jq
-        if: github.event_name == 'schedule'
+    plan:
+        runs-on: ubuntu-latest
+        outputs:
+            matrix: ${{ steps.process-diff.outputs.matrix }} ${{ steps.process-rebuild.outputs.matrix }}
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-go@v5
+              with:
+                  go-version: "1.21"
+            - run: |
+                  sudo apt-get update
+                  sudo apt-get install -y ca-certificates
+            - run: go install github.com/machbase/neo-pkgdev@58532a4524d44919dcbeaa4d3d029278c26dc5fb
+            - uses: technote-space/get-diff-action@v6
+              if: github.event_name == 'pull_request'
+              id: get-diff
+              with:
+                  PATTERNS: projects/**/package.yml
+            - name: ProcessDiff
+              if: github.event_name == 'pull_request'
+              id: process-diff
+              run: |
+                  if [ -n "${{ steps.get-diff.outputs.diff }}" ]; then
+                    for x in ${{ steps.get-diff.outputs.diff }}; do
+                      y=$(echo $x | sed 's#projects/\(.*\)/[^/]*#\1#')
+                      RESULT="$RESULT ${y//$'\n'/}"
+                    done
+                  else
+                    RESULT="neo-pkg-web-example"
+                  fi
+                  neo-pkgdev plan $RESULT
+            - run: echo '${{ steps.process-diff.outputs.matrix }}' | jq
+              if: github.event_name == 'pull_request'
+            - name: ProcessDiff
+              if: github.event_name == 'schedule'
+              id: process-rebuild
+              run: mkdir ./tmp && neo-pkgdev rebuild-plan --dir ./tmp
+            - run: echo '${{ steps.process-rebuild.outputs.matrix }}' | jq
+              if: github.event_name == 'schedule'
 
-  build:
-    needs: plan
-    strategy:
-      fail-fast: false
-      matrix: 
-        include: ${{ fromJSON(needs.plan.outputs.matrix) }}
-    runs-on: ${{ matrix.platform.os }}
-    container: ${{ matrix.platform.container }}
-    name: ${{ matrix.pkg }} ${{ matrix.platform.name }}
-    env:
-      PKGS_PATH: ${{ github.workspace }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
-        with:
-          go-version: '1.21'
-      - uses: actions/setup-node@v4
-        if: ${{ contains(matrix.platform.container, 'ubuntu')}}
-        with:
-          node-version: '20'
-      - name: prep-ubuntu
-        if: ${{ contains(matrix.platform.container, 'ubuntu')}}
-        run: |
-          apt-get update
-          apt-get install -y ca-certificates wget
-          mkdir /tmp/pkgs
-      - name: prep-darwin
-        if: ${{ contains(matrix.platform.container, 'darwin')}}
-        run: |
-          mkdir /tmp/pkgs
-      - run: |
-          go install github.com/machbase/neo-pkgdev@58532a4524d44919dcbeaa4d3d029278c26dc5fb
-      - name: audit
-        run: neo-pkgdev audit ${{ matrix.pkg }}
-      - name: build
+    build:
+        needs: plan
+        strategy:
+            fail-fast: false
+            matrix:
+                include: ${{ fromJSON(needs.plan.outputs.matrix) }}
+        runs-on: ${{ matrix.platform.os }}
+        container: ${{ matrix.platform.container }}
+        name: ${{ matrix.pkg }} ${{ matrix.platform.name }}
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.P_PKGS_S3_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.P_PKGS_S3_SECRET }}
-        run: neo-pkgdev build ${{ matrix.pkg }}
+            PKGS_PATH: ${{ github.workspace }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-go@v5
+              with:
+                  go-version: "1.22"
+            - uses: actions/setup-node@v4
+              if: ${{ contains(matrix.platform.container, 'ubuntu')}}
+              with:
+                  node-version: "20"
+            - name: prep-ubuntu
+              if: ${{ contains(matrix.platform.container, 'ubuntu')}}
+              run: |
+                  apt-get update
+                  apt-get install -y ca-certificates wget
+                  mkdir /tmp/pkgs
+            - name: prep-darwin
+              if: ${{ contains(matrix.platform.container, 'darwin')}}
+              run: |
+                  mkdir /tmp/pkgs
+            - run: |
+                  go install github.com/machbase/neo-pkgdev@58532a4524d44919dcbeaa4d3d029278c26dc5fb
+            - name: audit
+              run: neo-pkgdev audit ${{ matrix.pkg }}
+            - name: build
+              env:
+                  AWS_ACCESS_KEY_ID: ${{ secrets.P_PKGS_S3_KEY }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.P_PKGS_S3_SECRET }}
+              run: neo-pkgdev build ${{ matrix.pkg }}
