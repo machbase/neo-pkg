@@ -2,8 +2,8 @@ distributable:
   github: machbase/neo-pkg-llm
   strip_components: 1
 description: |
-  neo-pkg-llm package for machbase-neo.
-  LLM agent backend process.
+  LLM agent backend process package for machbase-neo.
+  Provides LLM-based agent functionality with configurable backends.
 platforms:
   - linux/amd64
   - linux/arm64
