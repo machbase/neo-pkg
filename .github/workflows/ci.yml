@@ -46,7 +46,7 @@ jobs:
               run: |
                   if [ -n "${{ steps.get-diff.outputs.diff }}" ]; then
                     for x in ${{ steps.get-diff.outputs.diff }}; do
-                      y=$(echo $x | sed 's#projects/\(.\)/[^/]#\1#')
+                      y=$(echo $x | sed 's#projects/\(.*\)/[^/]*#\1#')
                       RESULT="$RESULT ${y//$'\n'/}"
                     done
                   else
