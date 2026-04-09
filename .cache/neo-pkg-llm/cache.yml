@@ -22,13 +22,13 @@ github:
     forks_count: 0
     forks: 0
     stargazers_count: 1
-    language: Go
+    language: HTML
     license: null
     default_branch: main
-latest_version: 0.2.3
-latest_release: v0.2.3
-latest_release_tag: 0.2.3
-published_at: 2026-03-30T00:15:27Z
+latest_version: 0.2.4
+latest_release: v0.2.4
+latest_release_tag: 0.2.4
+published_at: 2026-04-09T01:37:47Z
 strip_components: 1
 platforms:
     - linux/amd64
