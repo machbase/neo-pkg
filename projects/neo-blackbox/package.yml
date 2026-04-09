@@ -1,5 +1,5 @@
 distributable:
-  github: machbase/neo-pkg-blackbox
+  github: machbase/neo-pkg-bbox
   strip_components: 1
 description: |
   neo-blackbox package for machbase-neo.
