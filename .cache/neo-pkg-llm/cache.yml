@@ -22,7 +22,7 @@ github:
     forks_count: 0
     forks: 0
     stargazers_count: 1
-    language: HTML
+    language: Go
     license: null
     default_branch: main
 latest_version: 0.2.5
