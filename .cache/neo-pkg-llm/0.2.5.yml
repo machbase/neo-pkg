@@ -5,7 +5,7 @@
   dist_url: https://p-edge-packages.s3.ap-northeast-2.amazonaws.com/neo-pkg/machbase/neo-pkg-llm/neo-pkg-llm-0.2.5-linux-amd64.tar.gz
   status_code: 200
   available: true
-  content_length: 6100217
+  content_length: 6100295
 - name: neo-pkg-llm
   version: 0.2.5
   platform_os: darwin
@@ -13,7 +13,7 @@
   dist_url: https://p-edge-packages.s3.ap-northeast-2.amazonaws.com/neo-pkg/machbase/neo-pkg-llm/neo-pkg-llm-0.2.5-darwin-arm64.tar.gz
   status_code: 200
   available: true
-  content_length: 5760849
+  content_length: 5760868
 - name: neo-pkg-llm
   version: 0.2.5
   platform_os: windows
@@ -21,4 +21,4 @@
   dist_url: https://p-edge-packages.s3.ap-northeast-2.amazonaws.com/neo-pkg/machbase/neo-pkg-llm/neo-pkg-llm-0.2.5-windows-amd64.tar.gz
   status_code: 200
   available: true
-  content_length: 6226773
+  content_length: 6226768
