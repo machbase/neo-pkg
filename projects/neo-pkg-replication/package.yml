@@ -1,0 +1,6 @@
+distributable:
+    github: machbase/neo-pkg-replication
+    strip_components: 1
+
+description: |
+    A Machbase TAG/LOG table replication tool built on machbase-neo jsh that reads data via _RID and writes to a target DB with at-least-once guarantees using checkpoint files.

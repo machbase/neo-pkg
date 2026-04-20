@@ -1,4 +1,6 @@
 featured:
-  - neo-cat
-  - neo-blackbox
-  - neo-pkg-llm
+    - neo-cat
+    - neo-blackbox
+    - neo-pkg-llm
+    - neo-pkg-replication
+    - neo-pkg-opcua-client

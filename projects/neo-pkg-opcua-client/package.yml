@@ -1,0 +1,6 @@
+distributable:
+    github: machbase/neo-pkg-opcua-client
+    strip_components: 1
+
+description: |
+    A collector package that periodically reads OPC UA server data and ingests it into Machbase TAG tables within the Machbase Neo JSH environment.
