@@ -30,10 +30,10 @@ github:
         url: ""
         nodeid: MDc6TGljZW5zZTA=
     default_branch: main
-latest_version: 0.1.11
-latest_release: v0.1.11
-latest_release_tag: v0.1.11
-published_at: 2026-04-16T08:43:17Z
+latest_version: 0.1.17
+latest_release: v0.1.17
+latest_release_tag: v0.1.17
+published_at: 2026-04-23T09:32:14Z
 strip_components: 1
 platforms:
     - linux/amd64
